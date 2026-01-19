@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" style="height: auto; min-height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Essentials - Your Student Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        'pastel-pink': '#FFD6E8',
+                        'pastel-mint': '#C7F5E8',
+                        'pastel-lavender': '#E5DEFF',
+                        'neon-purple': '#B24BF3',
+                        'neon-blue': '#00D9FF',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .hover-scale {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(178, 75, 243, 0.2);
+        }
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes bounce-subtle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .animate-bounce-subtle {
+            animation: bounce-subtle 2s ease-in-out infinite;
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s ease-in-out infinite;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pastel-pink via-pastel-lavender to-pastel-mint min-h-screen" style="height: auto; min-height: 100%;">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-neon-purple to-neon-blue rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">🎓</span>
+                    </div>
+                    <span class="text-xl font-bold bg-gradient-to-r from-neon-purple to-neon-blue bg-clip-text text-transparent">Campus Essentials</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="showPage('cart')" class="relative hover-scale">
+                        <i data-lucide="shopping-cart" class="w-6 h-6 text-gray-700"></i>
+                        <span class="absolute -top-2 -right-2 bg-neon-purple text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">3</span>
+                    </button>
+                    <button onclick="showPage('profile')" class="hover-scale">
+                        <i data-lucide="user" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page-section active">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+            
+            <!-- Search Bar -->
+            <div class="relative">
+                <input type="text" placeholder="Search for campus essentials..." class="w-full px-4 py-4 pl-12 rounded-3xl border-2 border-transparent focus:border-neon-purple focus:outline-none shadow-lg hover-glow transition-all">
+                <i data-lucide="search" class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2"></i>
+            </div>
+
+            <!-- Flash Sale Banner -->
+            <div class="bg-gradient-to-r from-neon-purple to-neon-blue rounded-3xl p-6 text-white shadow-xl hover-scale animate-bounce-subtle">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-1">⚡ Flash Sale!</h2>
+                        <p class="text-sm opacity-90">Up to 50% off on selected items</p>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-2">
+                        <p class="text-xs font-semibold">ENDS IN</p>
+                        <p class="text-2xl font-bold">02:45:30</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Chips -->
+            <div class="flex overflow-x-auto space-x-3 pb-2 scrollbar-hide">
+                <button onclick="showPage('products')" class="flex-shrink-0 bg-white rounded-full px-6 py-3 shadow-md hover-scale flex items-center space-x-2 border-2 border-transparent hover:border-neon-purple transition-all">
+                    <span class="text-2xl">📚</span>
+                    <span class="font-semibold text-gray-800">Stationery</span>
+                </button>
+                <button onclick="showPage('products')" class="flex-shrink-0 bg-white rounded-full px-6 py-3 shadow-md hover-scale flex items-center space-x-2 border-2 border-transparent hover:border-neon-blue transition-all">
+                    <span class="text-2xl">🔌</span>
+                    <span class="font-semibold text-gray-800">Gadgets</span>
+                </button>
+                <button onclick="showPage('products')" class="flex-shrink-0 bg-white rounded-full px-6 py-3 shadow-md hover-scale flex items-center space-x-2 border-2 border-transparent hover:border-neon-purple transition-all">
+                    <span class="text-2xl">🎒</span>
+                    <span class="font-semibold text-gray-800">Essentials</span>
+                </button>
+                <button onclick="showPage('products')" class="flex-shrink-0 bg-white rounded-full px-6 py-3 shadow-md hover-scale flex items-center space-x-2 border-2 border-transparent hover:border-neon-blue transition-all">
+                    <span class="text-2xl">☕</span>
+                    <span class="font-semibold text-gray-800">Lifestyle</span>
+                </button>
+            </div>
+
+            <!-- Trending Products -->
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">🔥 Trending Now</h2>
+                    <button onclick="showPage('products')" class="text-neon-purple font-semibold text-sm hover:underline">See All</button>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div onclick="showPage('product-detail')" class="bg-white rounded-3xl p-4 shadow-lg hover-scale cursor-pointer">
+                        <div class="aspect-square bg-pastel-lavender rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400&h=400&fit=crop" alt="Wireless Earbuds" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1 text-sm">Wireless Earbuds Pro</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon-purple font-bold text-lg">$49</span>
+                            <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white rounded-full p-2 hover-scale">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div onclick="showPage('product-detail')" class="bg-white rounded-3xl p-4 shadow-lg hover-scale cursor-pointer">
+                        <div class="aspect-square bg-pastel-mint rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop" alt="Study Planner" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1 text-sm">Smart Study Planner</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon-purple font-bold text-lg">$15</span>
+                            <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white rounded-full p-2 hover-scale">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div onclick="showPage('product-detail')" class="bg-white rounded-3xl p-4 shadow-lg hover-scale cursor-pointer">
+                        <div class="aspect-square bg-pastel-pink rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop" alt="Backpack" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1 text-sm">Campus Backpack</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon-purple font-bold text-lg">$39</span>
+                            <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white rounded-full p-2 hover-scale">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div onclick="showPage('product-detail')" class="bg-white rounded-3xl p-4 shadow-lg hover-scale cursor-pointer">
+                        <div class="aspect-square bg-pastel-lavender rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&h=400&fit=crop" alt="Water Bottle" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1 text-sm">Insulated Bottle</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon-purple font-bold text-lg">$25</span>
+                            <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white rounded-full p-2 hover-scale">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Bundles -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">📦 Featured Bundles</h2>
+                <div class="space-y-4">
+                    <div class="bg-white rounded-3xl p-6 shadow-lg hover-scale">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-24 h-24 bg-gradient-to-br from-pastel-pink to-pastel-lavender rounded-2xl flex items-center justify-center text-4xl">
+                                🎓
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg text-gray-800 mb-1">Engineering Starter Pack</h3>
+                                <p class="text-sm text-gray-600 mb-2">Calculator, Notebook Set, USB Drive & More</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-gray-400 line-through text-sm">$89</span>
+                                        <span class="text-neon-purple font-bold text-xl ml-2">$69</span>
+                                    </div>
+                                    <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white px-6 py-2 rounded-full font-semibold hover-scale">
+                                        Add Bundle
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-3xl p-6 shadow-lg hover-scale">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-24 h-24 bg-gradient-to-br from-pastel-mint to-pastel-lavender rounded-2xl flex items-center justify-center text-4xl">
+                                ✏️
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg text-gray-800 mb-1">Creative Arts Bundle</h3>
+                                <p class="text-sm text-gray-600 mb-2">Sketchbook, Markers, Pencil Set & Canvas</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-gray-400 line-through text-sm">$75</span>
+                                        <span class="text-neon-purple font-bold text-xl ml-2">$59</span>
+                                    </div>
+                                    <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white px-6 py-2 rounded-full font-semibold hover-scale">
+                                        Add Bundle
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Product Listing Page -->
+    <div id="products-page" class="page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            
+            <!-- Back Button -->
+            <button onclick="showPage('home')" class="flex items-center space-x-2 text-gray-700 mb-4 hover-scale">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                <span class="font-semibold">Back</span>
+            </button>
+
+            <!-- Filter and Sort -->
+            <div class="bg-white rounded-3xl p-4 shadow-lg mb-6">
+                <div class="flex items-center justify-between space-x-4">
+                    <button class="flex items-center space-x-2 px-4 py-2 bg-pastel-lavender rounded-full hover-scale">
+                        <i data-lucide="filter" class="w-4 h-4"></i>
+                        <span class="font-semibold text-sm">Filter</span>
+                    </button>
+                    <button class="flex items-center space-x-2 px-4 py-2 bg-pastel-mint rounded-full hover-scale">
+                        <i data-lucide="arrow-up-down" class="w-4 h-4"></i>
+                        <span class="font-semibold text-sm">Sort</span>
+                    </button>
+                    <div class="flex-1"></div>
+                    <span class="text-sm text-gray-600 font-semibold">24 items</span>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div onclick="showPage('product-detail')" class="bg-white rounded-3xl p-4 shadow-lg hover-scale cursor-pointer">
+                    <div class="relative">
+                        <div class="aspect-square bg-pastel-pink rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&h=400&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Only 3 left
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-1 text-sm">Premium Notebook Set</h3>
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400 text-xs">⭐⭐⭐⭐⭐</span>
+                        <span class="text-gray-500 text-xs ml-1">(128)</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-neon-purple font-bold text-lg">$18</span>
+                        <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white rounded-full p-2 hover-scale">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+                <div onclick="showPage('product-detail')" class="bg-white rounded-3xl p-4 shadow-lg hover-scale cursor-pointer">
+                    <div class="relative">
+                        <div class="aspect-square bg-pastel-mint rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            In Stock
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-1 text-sm">USB-C Hub 7-in-1</h3>
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400 text-xs">⭐⭐⭐⭐</span>
+                        <span class="text-gray-500 text-xs ml-1">(89)</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-neon-purple font-bold text-lg">$35</span>
+                        <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white rounded-full p-2 hover-scale">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+                <div onclick="showPage('product-detail')" class="bg-white rounded-3xl p-4 shadow-lg hover-scale cursor-pointer">
+                    <div class="relative">
+                        <div class="aspect-square bg-pastel-lavender rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&h=400&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Only 5 left
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-1 text-sm">Polarized Sunglasses</h3>
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400 text-xs">⭐⭐⭐⭐⭐</span>
+                        <span class="text-gray-500 text-xs ml-1">(203)</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-neon-purple font-bold text-lg">$29</span>
+                        <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white rounded-full p-2 hover-scale">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+                <div onclick="showPage('product-detail')" class="bg-white rounded-3xl p-4 shadow-lg hover-scale cursor-pointer">
+                    <div class="relative">
+                        <div class="aspect-square bg-pastel-pink rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&h=400&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            In Stock
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-1 text-sm">Eco Water Bottle</h3>
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400 text-xs">⭐⭐⭐⭐</span>
+                        <span class="text-gray-500 text-xs ml-1">(156)</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-neon-purple font-bold text-lg">$22</span>
+                        <button class="bg-gradient-to-r from-neon-purple to-neon-blue text-white rounded-full p-2 hover-scale">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Product Detail Page -->
+    <div id="product-detail-page" class="page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            
+            <!-- Back Button -->
+            <button onclick="showPage('products')" class="flex items-center space-x-2 text-gray-700 mb-4 hover-scale">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                <span class="font-semibold">Back</span>
+            </button>
+
+            <!-- Product Image Gallery -->
+            <div class="bg-white rounded-3xl p-6 shadow-lg mb-6">
+                <div class="aspect-square bg-pastel-lavender rounded-2xl mb-4 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&h=800&fit=crop" alt="Product" class="w-full h-full object-cover">
+                </div>
+                <div class="flex space-x-3 overflow-x-auto">
+                    <div class="w-20 h-20 bg-pastel-pink rounded-xl flex-shrink-0 overflow-hidden hover-scale cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=200&h=200&fit=crop" alt="Thumbnail" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-20 h-20 bg-pastel-mint rounded-xl flex-shrink-0 overflow-hidden hover-scale cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200&h=200&fit=crop" alt="Thumbnail" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-20 h-20 bg-pastel-lavender rounded-xl flex-shrink-0 overflow-hidden hover-scale cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=200&h=200&fit=crop" alt="Thumbnail" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="bg-white rounded-3xl p-6 shadow-lg mb-6">
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">Wireless Earbuds Pro</h1>
+                <div class="flex items-center mb-4">
+                    <span class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</span>
+                    <span class="text-gray-600 text-sm ml-2">(4.8 from 342 reviews)</span>
+                </div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="text-4xl font-bold text-neon-purple">$49</span>
+                    <span class="text-gray-400 line-through text-xl">$79</span>
+                    <span class="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">38% OFF</span>
+                </div>
+                <p class="text-gray-600 mb-6">Premium wireless earbuds with active noise cancellation, 30-hour battery life, and crystal-clear sound quality. Perfect for studying, commuting, or just vibing to your favorite tunes. 🎵</p>
+                
+                <!-- Emoji Reviews -->
+                <div class="mb-6">
+                    <h3 class="font-bold text-gray-800 mb-3">What students say:</h3>
+                    <div class="flex space-x-2">
+                        <div class="bg-pastel-pink rounded-2xl px-4 py-2 text-center">
+                            <div class="text-3xl mb-1">🔥</div>
+                            <div class="text-xs text-gray-600">Amazing</div>
+                            <div class="text-sm font-bold">89%</div>
+                        </div>
+                        <div class="bg-pastel-mint rounded-2xl px-4 py-2 text-center">
+                            <div class="text-3xl mb-1">💯</div>
+                            <div class="text-xs text-gray-600">Worth it</div>
+                            <div class="text-sm font-bold">95%</div>
+                        </div>
+                        <div class="bg-pastel-lavender rounded-2xl px-4 py-2 text-center">
+                            <div class="text-3xl mb-1">🎧</div>
+                            <div class="text-xs text-gray-600">Sound</div>
+                            <div class="text-sm font-bold">92%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-gradient-to-r from-neon-purple to-neon-blue text-white py-4 rounded-full font-bold text-lg hover-scale">
+                        Add to Cart
+                    </button>
+                    <button class="bg-pastel-pink p-4 rounded-full hover-scale">
+                        <i data-lucide="heart" class="w-6 h-6 text-neon-purple"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Cart Page -->
+    <div id="cart-page" class="page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-32">
+            
+            <!-- Back Button -->
+            <button onclick="showPage('home')" class="flex items-center space-x-2 text-gray-700 mb-4 hover-scale">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                <span class="font-semibold">Back</span>
+            </button>
+
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Your Cart 🛒</h1>
+
+            <!-- Cart Items -->
+            <div class="space-y-4 mb-6">
+                <div class="bg-white rounded-3xl p-4 shadow-lg">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-24 h-24 bg-pastel-lavender rounded-2xl overflow-hidden flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=200&h=200&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">Wireless Earbuds Pro</h3>
+                            <p class="text-neon-purple font-bold text-lg mb-2">$49</p>
+                            <div class="flex items-center space-x-3">
+                                <button class="w-8 h-8 bg-pastel-lavender rounded-full flex items-center justify-center hover-scale">
+                                    <i data-lucide="minus" class="w-4 h-4"></i>
+                                </button>
+                                <span class="font-bold text-gray-800">1</span>
+                                <button class="w-8 h-8 bg-pastel-lavender rounded-full flex items-center justify-center hover-scale">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="text-red-500 hover-scale">
+                            <i data-lucide="trash-2" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl p-4 shadow-lg">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-24 h-24 bg-pastel-mint rounded-2xl overflow-hidden flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&h=200&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">Smart Study Planner</h3>
+                            <p class="text-neon-purple font-bold text-lg mb-2">$15</p>
+                            <div class="flex items-center space-x-3">
+                                <button class="w-8 h-8 bg-pastel-mint rounded-full flex items-center justify-center hover-scale">
+                                    <i data-lucide="minus" class="w-4 h-4"></i>
+                                </button>
+                                <span class="font-bold text-gray-800">2</span>
+                                <button class="w-8 h-8 bg-pastel-mint rounded-full flex items-center justify-center hover-scale">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="text-red-500 hover-scale">
+                            <i data-lucide="trash-2" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl p-4 shadow-lg">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-24 h-24 bg-pastel-pink rounded-2xl overflow-hidden flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&h=200&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">Campus Backpack</h3>
+                            <p class="text-neon-purple font-bold text-lg mb-2">$39</p>
+                            <div class="flex items-center space-x-3">
+                                <button class="w-8 h-8 bg-pastel-pink rounded-full flex items-center justify-center hover-scale">
+                                    <i data-lucide="minus" class="w-4 h-4"></i>
+                                </button>
+                                <span class="font-bold text-gray-800">1</span>
+                                <button class="w-8 h-8 bg-pastel-pink rounded-full flex items-center justify-center hover-scale">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="text-red-500 hover-scale">
+                            <i data-lucide="trash-2" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="bg-white rounded-3xl p-6 shadow-lg">
+                <h2 class="font-bold text-xl text-gray-800 mb-4">Order Summary</h2>
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between text-gray-600">
+                        <span>Subtotal</span>
+                        <span class="font-semibold">$118</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Shipping</span>
+                        <span class="font-semibold text-green-500">FREE</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Student Discount (10%)</span>
+                        <span class="font-semibold text-neon-purple">-$12</span>
+                    </div>
+                    <div class="border-t pt-3 flex justify-between text-xl font-bold text-gray-800">
+                        <span>Total</span>
+                        <span class="text-neon-purple">$106</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sticky Checkout Button -->
+        <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-t border-gray-200 p-4 shadow-2xl">
+            <div class="max-w-7xl mx-auto">
+                <button class="w-full bg-gradient-to-r from-neon-purple to-neon-blue text-white py-4 rounded-full font-bold text-lg hover-scale shadow-xl">
+                    Checkout - $106
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profile-page" class="page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            
+            <!-- Back Button -->
+            <button onclick="showPage('home')" class="flex items-center space-x-2 text-gray-700 mb-4 hover-scale">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                <span class="font-semibold">Back</span>
+            </button>
+
+            <!-- Profile Header -->
+            <div class="bg-white rounded-3xl p-6 shadow-lg mb-6">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-neon-purple to-neon-blue rounded-full flex items-center justify-center text-white text-3xl font-bold">
+                        AS
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-800">Alex Student</h1>
+                        <p class="text-gray-600">alex.student@university.edu</p>
+                        <div class="flex items-center space-x-2 mt-1">
+                            <span class="bg-pastel-lavender text-neon-purple text-xs font-bold px-3 py-1 rounded-full">🎓 Student Verified</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-pastel-pink rounded-2xl p-4 text-center">
+                        <div class="text-2xl font-bold text-gray-800 mb-1">12</div>
+                        <div class="text-xs text-gray-600">Orders</div>
+                    </div>
+                    <div class="bg-pastel-mint rounded-2xl p-4 text-center">
+                        <div class="text-2xl font-bold text-gray-800 mb-1">8</div>
+                        <div class="text-xs text-gray-600">Saved</div>
+                    </div>
+                    <div class="bg-pastel-lavender rounded-2xl p-4 text-center">
+                        <div class="text-2xl font-bold text-gray-800 mb-1">$340</div>
+                        <div class="text-xs text-gray-600">Saved</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order History -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">📦 Recent Orders</h2>
+                <div class="space-y-4">
+                    <div class="bg-white rounded-3xl p-4 shadow-lg">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm text-gray-600">Order #12345</span>
+                            <span class="bg-green-100 text-green-600 text-xs font-bold px-3 py-1 rounded-full">Delivered</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-16 h-16 bg-pastel-lavender rounded-xl overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=200&h=200&fit=crop" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-gray-800 text-sm">Wireless Earbuds Pro</h3>
+                                <p class="text-gray-600 text-xs">Delivered on May 15, 2024</p>
+                            </div>
+                            <span class="text-neon-purple font-bold">$49</span>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-3xl p-4 shadow-lg">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm text-gray-600">Order #12344</span>
+                            <span class="bg-blue-100 text-blue-600 text-xs font-bold px-3 py-1 rounded-full">In Transit</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-16 h-16 bg-pastel-mint rounded-xl overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&h=200&fit=crop" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-gray-800 text-sm">Campus Backpack</h3>
+                                <p class="text-gray-600 text-xs">Expected May 20, 2024</p>
+                            </div>
+                            <span class="text-neon-purple font-bold">$39</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saved Items -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">💜 Saved Items</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-3xl p-4 shadow-lg hover-scale">
+                        <div class="aspect-square bg-pastel-pink rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&h=400&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1 text-sm">Insulated Bottle</h3>
+                        <span class="text-neon-purple font-bold text-lg">$25</span>
+                    </div>
+                    <div class="bg-white rounded-3xl p-4 shadow-lg hover-scale">
+                        <div class="aspect-square bg-pastel-mint rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1 text-sm">USB-C Hub</h3>
+                        <span class="text-neon-purple font-bold text-lg">$35</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">✨ Just For You</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-3xl p-4 shadow-lg hover-scale">
+                        <div class="aspect-square bg-pastel-lavender rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&h=400&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1 text-sm">Sunglasses</h3>
+                        <span class="text-neon-purple font-bold text-lg">$29</span>
+                    </div>
+                    <div class="bg-white rounded-3xl p-4 shadow-lg hover-scale">
+                        <div class="aspect-square bg-pastel-pink rounded-2xl mb-3 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&h=400&fit=crop" alt="Product" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1 text-sm">Notebook Set</h3>
+                        <span class="text-neon-purple font-bold text-lg">$18</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(pageId + '-page').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
