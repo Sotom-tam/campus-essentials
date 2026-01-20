@@ -6,9 +6,9 @@ import bcrypt from "bcrypt";
 import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
-import { PerformanceObserverEntryList } from "node:perf_hooks";
+
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 dotenv.config();
 const saltRounds = 10;
 app.use(cors({ origin: "http://localhost:5173" }));
@@ -27,7 +27,7 @@ const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "secrets",
-  password: "Blessed1@cu",
+  password: process.env.DB_PASSWORD,
   port: 5432,
 });
 db.connect();
@@ -177,6 +177,6 @@ passport.serializeUser((user, cb) => {
 passport.deserializeUser((user, cb) => {
   cb(null, user);
 });
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${port}`);
 });
