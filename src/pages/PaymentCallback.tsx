@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const PaymentCallback = () => {
+  const API = import.meta.env.VITE_API_URL;
   const [message, setMessage] = useState("Verifying Payment...");
   useEffect(() => {
     const verifyPayment = async () => {
@@ -8,7 +9,7 @@ const PaymentCallback = () => {
       const parameters = new URLSearchParams(window.location.search);
       const reference = parameters.get("reference");
       console.log("sending request" + reference);
-      const response = await fetch("http://localhost:3000/verify/payment", {
+      const response = await fetch(`${API}/verify/payment`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
