@@ -11,7 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 dotenv.config();
 const saltRounds = 10;
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://campus-essentials.vercel.app/"],
+  }),
+);
 app.use(express.json());
 app.use(express.static("public"));
 app.use(
@@ -47,7 +51,7 @@ app.post("/checkout", async (req, res) => {
         body: JSON.stringify({
           email: email,
           amount: amount,
-          callback_url: "http://localhost:5173/payment-callback",
+          callback_url: `${process.env.FRONTEND_URL}/payment-callback`,
         }),
       },
     );
