@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
+const API = import.meta.env.VITE_API_URL;
 function Register(){
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
@@ -9,7 +10,10 @@ function Register(){
         event.preventDefault()
         console.log("Submitting:",email,password)
         try {
-            const res=await fetch("http://localhost:3000/register",{
+            if(!API){
+            console.warn("Backend not connected yet");
+            }else{
+            const res=await fetch(`${API}/register`,{
                 method:"POST",
                 headers:{ "Content-type": "application/json" },
                 body:JSON.stringify({
@@ -21,7 +25,7 @@ function Register(){
             console.log(data)
             if(data.success){
                 navigate("/categories")
-            }
+            }}
         } catch (error) {
             console.log(error)
         }

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
+const API = import.meta.env.VITE_API_URL;
 function Login(){
     const navigate=useNavigate()
     const[email,setEmail]=useState("")
@@ -8,20 +9,23 @@ function Login(){
     async function handleSubmit(e:React.FormEvent<HTMLFormElement>) {
         console.log("Submitting:",email,password)
         e.preventDefault()
-        const response =await fetch("http://localhost:3000/login",{
+        if (!API) {
+            console.warn("Backend not connected yet");
+        }else{
+        const response =await fetch(`${API}/login`,{
             method:"POST",
             headers:{ "Content-type": "application/json" },
             body:JSON.stringify({
                 email:email,
                 password:password
             })
-        }) 
+        })
         const data= await response.json()
         console.log(data)
         if(data.success){
             navigate("/categories",{state:{email:data.userEmail}})
             console.log(data.userEmail)
-        }
+        }}
     }
     return<div className="main-container">
     <form onSubmit={handleSubmit}>
