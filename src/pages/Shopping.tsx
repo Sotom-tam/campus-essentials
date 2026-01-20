@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import categories from '../categories'
 import NavBar from '../components/NavBar'
-import SearchBar from '../components/SearchBar'
 import Footer from '../components/Footer'
 import Checkout from './Checkout'
 import ProductsCategoryHolder from '../components/ProductsCategoryHolder'
@@ -17,6 +16,7 @@ interface Item {
 }
 function ShoppingPage() {
   const [cart,setCart]=useState<Item[]>([])
+ 
       function ToCart(itemId:string){
         const ItemCategory=categories.find((category)=>category.id===itemId.split("-")[0])
         if(ItemCategory===undefined){
@@ -35,11 +35,9 @@ function ShoppingPage() {
     <>
       <NavBar cart={cart} />
       <div className="main-container">
-      <SearchBar/>
       <ProductsCategoryHolder ToCart={ToCart}/>
-      <Checkout cart={cart}/>
+      <Checkout/>
       </div>
-      
       <Footer/>
     </>
   )

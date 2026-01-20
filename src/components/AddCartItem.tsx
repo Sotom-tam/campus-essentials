@@ -7,7 +7,7 @@ interface ItemId{
 
 function AddCartItem({id,ToCart}:ItemId){
     return<>
-        <button className="btn shrink"  onClick={()=>ToCart(id)}>
+        <button className="btn"  onClick={()=>ToCart(id)}>
             <svg 
                 className='nav-icon' 
                 xmlns="http://www.w3.org/2000/svg" 

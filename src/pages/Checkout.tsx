@@ -1,24 +1,10 @@
 import PaymentForm from "../components/PaymentForm";
-import cart from "../cart";
 import "../style.css"
-console.log(cart)
-interface CartProps{
-        id:string
-        name:string
-        description:string
-        price:number
-        imgURL:string
-        alt:string
-        inStock:boolean
-}
-interface CartComponentProps{
-  cart:CartProps[]
-}
-function Checkout({cart}:CartComponentProps) {
+
+function Checkout() {
   return (
-    <>
-      <PaymentForm cart={cart}/>
-    </>
+      <PaymentForm />
+    
   );
 }
 export default Checkout;

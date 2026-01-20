@@ -2,7 +2,7 @@ import LandingNavBar from "../components/LandingNavBar"
 import Footer from "../components/Footer"
 import HeroSection from "../components/HeroSection"
 import CategoryHolder from "../components/CategoryHolder"
-import "../assets/LandingPage.css"
+import "../style.css"
 function LandingPage(){
     return<>
     <div className="container">
@@ -11,7 +11,6 @@ function LandingPage(){
     <CategoryHolder/>
     <Footer/>
     </div>
-    
     </>
 }
 export default LandingPage

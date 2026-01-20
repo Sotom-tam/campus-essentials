@@ -1,4 +1,5 @@
-//import heroImage from "../../public/img/campus essestials.png"
+
+import { Link } from "react-router-dom"
 function HeroSection(){
     return<>
         <div className="hero-container">
@@ -9,8 +10,9 @@ function HeroSection(){
                 <h1 className="heading">Everything you Need All in one Space!</h1>
                 <p>We have all the Essentials for Student life, and they're Priced right too!</p>
                 <div className="btn-grp">
-                    <a className="btn">Shop Essentials</a>
-                    <a className="btn">Log in</a>
+                    <Link to="/categories" className="btn">Shop Essentials</Link>
+                    <Link to="/login" className="btn">Login</Link>
+                    
                 </div>
             </div>
             <div className="hero-image">

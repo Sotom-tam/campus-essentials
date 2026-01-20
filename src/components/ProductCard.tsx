@@ -25,8 +25,8 @@ function ProductCard({item,ToCart}:Itemprops){
             <p>{item.name}</p>
             <p className="subtext">{item.description}</p>
             </div>
-            <div className="holder">
-                <p className="grow">₦ {item.price}</p>
+            <div >
+                <p>₦ {item.price}</p>
                 <AddCartButton id={item.id.toString()} ToCart={ToCart} />
             </div>
         </div>
