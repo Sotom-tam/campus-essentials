@@ -1,4 +1,4 @@
-
+//import heroImage from "/public/img/campus.webp"
 import { Link } from "react-router-dom"
 function HeroSection(){
     return<>
