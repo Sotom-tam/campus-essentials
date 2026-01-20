@@ -11,18 +11,20 @@ interface InitializeResponse {
 }
 interface Props {
   amount: number;
+  userEmail:string;
 }
-const userEmail = "email@gmail.com";
+
 
 const PayButton = (props: Props) => {
   //console.log(typeof (props.amount * 100).toString());
   const handlePay = async () => {
+    console.log(props.userEmail)
     try {
       const res = await fetch("http://localhost:3000/checkout", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
-          email: userEmail,
+          email: props.userEmail,
           amount: props.amount * 100, //The amount must be in kobo
         }),
       });

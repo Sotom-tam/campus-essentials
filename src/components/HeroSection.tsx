@@ -10,7 +10,7 @@ function HeroSection(){
                 <h1 className="heading">Everything you Need All in one Space!</h1>
                 <p>We have all the Essentials for Student life, and they're Priced right too!</p>
                 <div className="btn-grp">
-                    <Link to="/categories" className="btn">Shop Essentials</Link>
+                    <Link to="/login" className="btn">Shop Essentials</Link>
                     <Link to="/login" className="btn">Login</Link>
                     
                 </div>

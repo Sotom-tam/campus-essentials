@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 const PaymentCallback = () => {
   const [message, setMessage] = useState("Verifying Payment...");
   useEffect(() => {
@@ -17,6 +18,7 @@ const PaymentCallback = () => {
       const data = await response.json();
       console.log(data.message);
       setMessage(data.message);
+      
     };
     verifyPayment();
   }, []);
@@ -24,6 +26,7 @@ const PaymentCallback = () => {
   return (
     <>
       <h2>{message}</h2>
+      <Link to="/categories">Shop more?</Link>
     </>
   );
 };

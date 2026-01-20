@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(
   session({
-    secret: "TOPSECRETWORD",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
   }),
@@ -130,7 +130,7 @@ app.post("/login", (req, res, next) => {
 
     req.login(user, (err) => {
       if (err) return next(err);
-      res.json({ success: true });
+      res.json({ success: true, userEmail: user.email });
     });
   })(req, res, next);
 });
@@ -178,5 +178,5 @@ passport.deserializeUser((user, cb) => {
   cb(null, user);
 });
 app.listen(PORT, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${PORT}`);
 });

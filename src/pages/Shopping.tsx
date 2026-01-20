@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 import Checkout from './Checkout'
 import ProductsCategoryHolder from '../components/ProductsCategoryHolder'
 import '../style.css'
+import { useLocation } from "react-router-dom";
 interface Item {
     id: string
     name: string
@@ -15,6 +16,8 @@ interface Item {
     inStock: boolean
 }
 function ShoppingPage() {
+  const location = useLocation();
+  const email = location.state?.email;
   const [cart,setCart]=useState<Item[]>([])
  
       function ToCart(itemId:string){
@@ -36,7 +39,7 @@ function ShoppingPage() {
       <NavBar cart={cart} />
       <div className="main-container">
       <ProductsCategoryHolder ToCart={ToCart}/>
-      <Checkout/>
+      <Checkout cart={cart} userEmail={email}/>
       </div>
       <Footer/>
     </>
