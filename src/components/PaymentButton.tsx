@@ -14,13 +14,13 @@ interface Props {
   userEmail:string;
 }
 
-
+const API = import.meta.env.VITE_API_URL;
 const PayButton = (props: Props) => {
   //console.log(typeof (props.amount * 100).toString());
   const handlePay = async () => {
     console.log(props.userEmail)
     try {
-      const res = await fetch("http://localhost:3000/checkout", {
+      const res = await fetch(`${API}/checkout`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
