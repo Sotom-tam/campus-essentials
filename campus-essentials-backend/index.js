@@ -15,7 +15,7 @@ dotenv.config();
 const saltRounds = 10;
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://campus-essentials.vercel.app/"],
+    origin: ["http://localhost:5173", "https://campus-essentials.vercel.app"],
   }),
 );
 app.use(express.json());
