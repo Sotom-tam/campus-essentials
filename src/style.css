@@ -654,3 +654,12 @@ form {
 .form-group>input:focus {
     outline: none;
 }
+
+.spinner-holder {
+    background-color: inherit;
+    box-sizing: border-box;
+    width: 2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+
+}

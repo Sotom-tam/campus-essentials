@@ -1,13 +1,17 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
+import Spinner from "../components/Spinner";
 const API = import.meta.env.VITE_API_URL;
 function Register(){
+   
+    const [loading,setLoading]=useState(<span>Register</span>)
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const navigate=useNavigate()
     async function handleForm(event:React.FormEvent<HTMLFormElement>){
         event.preventDefault()
+        setLoading(<Spinner/>)
         console.log("Submitting:",email,password)
         try {
             if(!API){
@@ -33,6 +37,7 @@ function Register(){
 
     return<div className="main-container">
     <form onSubmit={handleForm} >
+        <Link to="/">Campus Essentials</Link>
         <h2>Register</h2>
         <p>Welcome! Please Register by filling in your details below</p>
         <div className="form-group">
@@ -43,7 +48,7 @@ function Register(){
         <label htmlFor="password" >Password:</label>
         <input onChange={(e)=>setPassword(e.target.value)} name="password"type="password" placeholder="password" value={password} />
         </div>
-        <button className="btn" type="submit">Register</button>
+        <button className="btn" type="submit">{loading}</button>
         <p>Already't Have an Account? <Link to="/login">Login</Link></p>
     </form>
     </div>

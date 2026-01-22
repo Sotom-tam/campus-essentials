@@ -1,14 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import pg from "pg";
+import pg, { Client } from "pg";
 import bcrypt from "bcrypt";
 import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
-
+// import { Pool } from "pg";
+// const pool=pg
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 dotenv.config();
 const saltRounds = 10;
 app.use(
@@ -27,16 +29,20 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "secrets",
-  password: process.env.DB_PASSWORD,
-  port: 5432,
+const db = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }, // required for Supabase
 });
 db.connect();
 //Backend sending requests to the paystack API
-
+app.get("/", async (req, res) => {
+  const result = await db.query("SELECT * FROM users");
+  if (result.rows.length > 0) {
+    res.send("It works!");
+  } else {
+    res.send("Doesnt work");
+  }
+});
 app.post("/checkout", async (req, res) => {
   try {
     const { email, amount } = req.body;
@@ -91,7 +97,7 @@ app.get("/categories", (req, res) => {
 app.post("/register", async (req, res, cb) => {
   const email = req.body.email;
   const password = req.body.password;
-  //console.log(email, password);
+  console.log(email, password);
   try {
     const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
       email,
@@ -105,7 +111,7 @@ app.post("/register", async (req, res, cb) => {
         if (err) {
           console.error("Error hashing password:", err);
         } else {
-          console.log("Hashed Password:", hash);
+          //console.log("Hashed Password:", hash);
           const result = await db.query(
             "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email,password",
             [email, hash],
@@ -116,7 +122,7 @@ app.post("/register", async (req, res, cb) => {
             if (err) {
               cb(err);
             }
-            res.json({ sucess: true });
+            res.json({ success: true });
           });
         }
       });
