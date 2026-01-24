@@ -745,7 +745,8 @@ form {
         padding: 0.4rem 0.35rem;
     }
 
-    form {
+    form,
+    .cart-card {
         width: 85%;
     }
 }
