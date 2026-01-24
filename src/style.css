@@ -232,6 +232,11 @@ h2 {
     background-color: #B24BF3;
 }
 
+.btn:focus {
+    border: none;
+
+}
+
 a {
     text-decoration: none;
 }
@@ -466,8 +471,8 @@ nav {
 
 .btn {
     cursor: pointer;
-    padding: 0.5rem 1.0rem;
-    border-radius: 0.85rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.8rem;
     border: none;
     color: #ffffff;
     font-family: inherit;
@@ -497,31 +502,42 @@ nav {
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
-    padding: 0.0rem 1.5rem 0rem 3rem;
+    padding: 0.0rem 1.5rem 1.5rem 2.5rem;
+    overflow: hidden;
 }
 
 .hero-text {
     width: 60%;
-    z-index: 2;
+}
+
+.hero-text>.btn-grp {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.hero-text>.btn-grp>.btn {
+    font-size: 0.75rem;
+}
+
+.hero-image-holder {
+    width: 100%;
+    aspect-ratio: 3/2;
+    background-color: inherit;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 1rem 1rem 0 1rem;
 }
 
 .hero-image {
     box-sizing: border-box;
-    min-height: 100vh;
     width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-size: cover;
-    /* Fill container, keep aspect ratio */
-    background-image: url("/img/campus.webp");
-    background-position-y: 0px;
-    background-repeat: no-repeat;
+    aspect-ratio: 3/2;
 }
 
 
-.hero-image>img {
-    width: 100%;
-}
 
 .holder {
     display: grid;
@@ -546,16 +562,7 @@ nav {
     background-image: linear-gradient(90deg, #8b5cf6, #3b82f6, #ec4899);
 }
 
-.overlay {
-    box-sizing: border-box;
-    width: 90%;
-    position: absolute;
-    z-index: 2;
-    height: 100vh;
-    top: 145px;
-    background-image: url("/img/overlay.png");
-    background-repeat: no-repeat;
-}
+
 
 .category-section {
     width: 100%;
@@ -569,23 +576,29 @@ nav {
     flex-direction: column;
 }
 
+.category-section>h1 {
+    font-size: 1.5rem;
+}
+
 .landing-category-holder {
     display: grid;
     width: 85%;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 1rem;
     margin-bottom: 5rem;
     justify-content: space-evenly;
+    box-sizing: border-box;
 }
 
 .categories-card {
-    max-width: 15rem;
+    width: 100%;
     color: #4f3b5a;
     font-weight: 600;
-    height: 55vh;
+    aspect-ratio: 3/4;
     padding: 1rem;
     border-radius: 1.5rem;
     background-color: #FFFFFF;
+    box-sizing: border-box;
     box-shadow: 0 10px 25px rgba(178, 75, 243, 0.2);
     transition: 200ms;
 }
@@ -596,7 +609,7 @@ nav {
 
 .categories-card>.img-holder {
     width: 100%;
-    height: 30vh;
+    aspect-ratio: 3/3;
     overflow: hidden;
     border-radius: 0.75rem;
     display: flex;
@@ -663,3 +676,37 @@ form {
     border-radius: 50%;
 
 }
+
+@media screen and (max-width:850px) {
+    nav {
+        padding: 1rem 1.2rem;
+    }
+
+    .hero-container {
+        padding: 0rem 1rem 1rem 1.2rem;
+    }
+
+    .hero-text>.heading {
+        font-size: 1.8rem;
+    }
+
+    .hero-text>p {
+        font-size: 0.75rem;
+    }
+
+    .hero-text>.btn-grp {
+        width: 65%;
+    }
+
+    .btn {
+        font-size: 0.5rem;
+    }
+
+    .hero-text>.btn-grp .btn {
+        font-size: 0.4rem;
+        border-radius: 0.55rem;
+        padding: 0.4rem 0.35rem;
+    }
+}
+
+@media screen and() {}

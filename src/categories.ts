@@ -50,7 +50,7 @@ const categories:Categories[] = [
         name: "Luxe Luxury Face Moisturizer",
         description: "Moisturizing face cream.",
         price: 5500,
-        imgURL: "/img/Beauty/Moistureriser.png",
+        imgURL: "/img/Beauty/Moistureriser.jpg",
         alt: "Face Cream",
         inStock: true,
       },
