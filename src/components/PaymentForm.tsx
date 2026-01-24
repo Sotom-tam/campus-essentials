@@ -31,7 +31,7 @@ function PaymentForm({cart,userEmail}:CartProps){
   }
 
   const Subtotal = cart.reduce((sum, item) => {
-  return sum + item.price*quantity;
+  return sum + item.price*parseInt(item.quantity);
 }, 0);
     return <>
     <div className="cart-card">
