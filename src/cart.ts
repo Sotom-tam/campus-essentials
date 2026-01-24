@@ -5,6 +5,7 @@ interface Cart{
         price:number
         imgURL:string
         alt:string
+        quantity:string
         inStock:boolean
 }
 const cart:Cart[] =[

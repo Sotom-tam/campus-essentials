@@ -88,7 +88,7 @@ nav>.heading {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
 }
 
 h2 {
@@ -145,6 +145,10 @@ h2 {
 
 .category-holder {
     display: block;
+}
+
+.category-holder>.heading {
+    font-size: 2rem;
 }
 
 .product-holder {
@@ -245,6 +249,7 @@ a {
     border: none;
     background-color: #FFFFFF;
     padding: 0.4rem;
+    position: relative;
 }
 
 .notification {
@@ -258,8 +263,8 @@ a {
     height: 0.85rem;
     background-color: #B24BF3;
     border-radius: 50%;
-    right: 72px;
-    top: 15px;
+    right: 0px;
+    top: -5px;
     color: #FFFFFF;
     font-size: 0.75rem;
     border: 2px solid #FFFFFF;
@@ -356,11 +361,43 @@ a {
     font-family: inherit;
     margin: 0;
     text-align: start;
+    width: fit-content;
 }
 
 .cart-item>div .quantity {
+    display: flex;
+    align-items: center;
     font-size: 0.9rem;
     font-weight: 200;
+}
+
+.quantity>input {
+    width: 40px;
+    padding: 0.1rem 0.2rem;
+    box-sizing: border-box;
+    border: none;
+    background-color: #B24BF3;
+    color: #FFFFFF;
+    border-radius: 0.2rem;
+}
+
+.quantity>button {
+    background-color: inherit;
+    border: none;
+    margin-left: 0.2rem;
+    cursor: pointer;
+    border-radius: 0.2rem;
+    transition: 200ms;
+
+}
+
+.quantity>button:hover {
+    background-color: #8aace2;
+}
+
+.quantity>input,
+button:focus {
+    outline: none;
 }
 
 .cart-item>.img-holder {
@@ -707,6 +744,8 @@ form {
         border-radius: 0.55rem;
         padding: 0.4rem 0.35rem;
     }
-}
 
-@media screen and() {}
+    form {
+        width: 85%;
+    }
+}

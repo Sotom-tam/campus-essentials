@@ -8,6 +8,7 @@ interface Items{
         price:number
         imgURL:string
         alt:string
+        quantity:string
         inStock:boolean
 }
 interface ProductHolderProps{

@@ -13,6 +13,7 @@ interface Item {
     price: number
     imgURL: string
     alt: string
+    quantity:string
     inStock: boolean
 }
 function ShoppingPage() {

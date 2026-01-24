@@ -10,6 +10,7 @@ interface Categories{
         price:number
         imgURL:string
         alt:string
+        quantity:string
         inStock:boolean
     }[]
 }
@@ -34,6 +35,7 @@ const categories:Categories[] = [
         price: 2500,
         imgURL: "/img/Beauty/Juicy Put Lip gloss.webp",
         alt: "Lipgloss",
+        quantity:"1",
         inStock: true,
       },
       {
@@ -43,6 +45,7 @@ const categories:Categories[] = [
         price: 4500,
         imgURL: "/img/Beauty/high-angle-toilet-bag-with-brushes.webp",
         alt: "Makeup Bag",
+        quantity:"1",
         inStock: true,
       },
       {
@@ -52,6 +55,7 @@ const categories:Categories[] = [
         price: 5500,
         imgURL: "/img/Beauty/Moistureriser.jpg",
         alt: "Face Cream",
+        quantity:"1",
         inStock: true,
       },
       {
@@ -61,6 +65,7 @@ const categories:Categories[] = [
         price: 10500,
         imgURL: "/img/Beauty/Smart Collection 359 Tom Ford Perfume 100ml.webp",
         alt: "Perfume",
+        quantity:"1",
         inStock: true,
       },
     ],
@@ -77,6 +82,7 @@ const categories:Categories[] = [
         price: 800,
         imgURL: "/img/School/top-view-notebooks-table.webp",
         alt:"A notebook",
+        quantity:"1",
         inStock: true
       },
       {
@@ -86,6 +92,7 @@ const categories:Categories[] = [
         price: 5000,
         imgURL: "/img/School/calculator-black-background.webp",
         alt:"Calculator",
+        quantity:"1",
         inStock: true
       },
       {
@@ -95,6 +102,7 @@ const categories:Categories[] = [
         price: 2000,
         imgURL: "/img/School/BiC Cristal Original Ball Point Pen Pack of 10.webp",
         alt:"Pens",
+        quantity:"1",
         inStock: true
       },
       {
@@ -104,6 +112,7 @@ const categories:Categories[] = [
         price: 7000,
         imgURL: "/img/School/pendrive-isolated-white.webp",
         alt:"Usb Drive",
+        quantity:"1",
         inStock: true
       },
     ]
@@ -120,6 +129,7 @@ const categories:Categories[] = [
         price: 2500,
         imgURL: "img/Food and snacks/grandmas-chinchin-vanilla.webp",
         alt: "Chinchin",
+        quantity:"1",
         inStock: true,
       },
       {
@@ -129,6 +139,7 @@ const categories:Categories[] = [
         price: 12000,
         imgURL: "/img/Food and snacks/Indomie Onion Chicken.webp",
         alt: "Indomie",
+        quantity:"1",
         inStock: true,
       },
       {
@@ -137,7 +148,8 @@ const categories:Categories[] = [
         description: "Yummy snack to munch on.",
         price: 400,
         imgURL: "/img/Food and snacks/Munch it.webp",
-        alt: "Much it",
+        alt: "Munch it",
+        quantity:"1",
         inStock: true,
       },
       {
@@ -147,6 +159,7 @@ const categories:Categories[] = [
         price: 600,
         imgURL: "img/Food and snacks/Yale choco king chocolate coated biscuits x4.webp",
         alt: "Biscuits",
+        quantity:"1",
         inStock: true,
       },
     ],
@@ -163,6 +176,7 @@ const categories:Categories[] = [
         price: 5000,
         imgURL: "/img/Clothing/woman-fashion-hand-bag.webp",
         alt: "Fashion Bag",
+        quantity:"1",
         inStock: true,
       },
       {
@@ -172,6 +186,7 @@ const categories:Categories[] = [
         price: 6000,
         imgURL: "/img/Clothing/woman-bag.webp",
         alt: "Women Bag",
+        quantity:"1",
         inStock: true,
       },
       {
@@ -181,6 +196,7 @@ const categories:Categories[] = [
         price: 3500,
         imgURL: "/img/Clothing/shirt-mockup-concept-with-plain-clothing.webp",
         alt: "Shirt",
+        quantity:"1",
         inStock: true,
       },
       {
@@ -190,6 +206,7 @@ const categories:Categories[] = [
         price: 4000,
         imgURL: "/img/Clothing/black-toilet-bag-still-life.webp",
         alt: "Tote Bag",
+        quantity:"1",
         inStock: true,
       },
     ],

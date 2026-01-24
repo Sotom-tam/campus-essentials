@@ -27,7 +27,7 @@ function Login(){
         console.log(data)
         if(data.success){
             navigate("/categories",{state:{email:data.userEmail}})
-            console.log(data.userEmail)
+            //console.log(data.userEmail)
         }}
     }
     return<div className="main-container">

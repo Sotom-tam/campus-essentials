@@ -7,6 +7,7 @@ interface Item {
   description:string;
   alt: string;
   price: number;
+  quantity:string;
   inStock:boolean
 }
 interface Itemprops{
