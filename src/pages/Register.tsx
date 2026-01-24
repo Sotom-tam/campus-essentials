@@ -49,7 +49,7 @@ function Register(){
         <input onChange={(e)=>setPassword(e.target.value)} name="password"type="password" placeholder="password" value={password} />
         </div>
         <button className="btn" type="submit">{loading}</button>
-        <p>Already't Have an Account? <Link to="/login">Login</Link></p>
+        <p>Already Have an Account? <Link to="/login">Login</Link></p>
     </form>
     </div>
 }
