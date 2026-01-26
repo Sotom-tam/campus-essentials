@@ -1,4 +1,6 @@
 //type declaration for response from paystack API
+import Spinner from "./Spinner";
+import { useState } from "react";
 interface InitializeResponse {
   status: boolean;
   message: string;
@@ -16,9 +18,11 @@ interface Props {
 
 const API = import.meta.env.VITE_API_URL;
 const PayButton = (props: Props) => {
+   const [loading,setLoading]=useState(<span>Pay Now</span>)
   //console.log(typeof (props.amount * 100).toString());
   const handlePay = async () => {
     console.log(props.userEmail)
+    setLoading(<Spinner/>)
     try {
       const res = await fetch(`${API}/checkout`, {
         method: "POST",
@@ -37,7 +41,7 @@ const PayButton = (props: Props) => {
   };
   return (
     <>
-      <button className="btn pay" onClick={handlePay}>Pay Now</button>
+      <button className="btn pay" onClick={handlePay}>{loading}</button>
     </>
   );
 };
