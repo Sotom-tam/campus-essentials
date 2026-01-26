@@ -18,7 +18,6 @@ const PaymentCallback = () => {
         }),
       });
       const data = await response.json();
-      console.log(data.message);
       setMessage(<h1>{data.message}</h1>);
       
     };
@@ -26,10 +25,10 @@ const PaymentCallback = () => {
   },);
 
   return (
-    <>
+    <form>
       {message}
       <Link to="/categories">Shop more?</Link>
-    </>
+    </form>
   );
 };
 
