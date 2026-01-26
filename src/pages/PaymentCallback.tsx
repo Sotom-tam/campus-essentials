@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
+import Spinner from "../components/Spinner";
 const PaymentCallback = () => {
   const API = import.meta.env.VITE_API_URL;
-  const [message, setMessage] = useState(<h1>Verifying Your Payment <Spinner/></h1>);
+  const [message, setMessage] = useState(<p>Verifying Your Payment <Spinner stopColor="#B24BF3"/> </p>);
   useEffect(() => {
     const verifyPayment = async () => {
       //getting the reference from the url (query parameter)
@@ -18,17 +18,19 @@ const PaymentCallback = () => {
         }),
       });
       const data = await response.json();
-      setMessage(<h1>{data.message}</h1>);
+      setMessage(<p>{data.message}</p>);
       
     };
     verifyPayment();
   },);
 
   return (
-    <form>
+    <div className="main-container">
+      <form>
       {message}
       <Link to="/categories">Shop more?</Link>
-    </form>
+      </form>
+    </div>
   );
 };
 

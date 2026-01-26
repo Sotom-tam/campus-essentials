@@ -11,7 +11,7 @@ function Register(){
     const navigate=useNavigate()
     async function handleForm(event:React.FormEvent<HTMLFormElement>){
         event.preventDefault()
-        setLoading(<Spinner/>)
+        setLoading(<Spinner stopColor="#FFFFFF"/>)
         console.log("Submitting:",email,password)
         try {
             if(!API){

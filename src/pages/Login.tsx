@@ -11,7 +11,7 @@ function Login(){
     async function handleSubmit(e:React.FormEvent<HTMLFormElement>) {
         console.log("Submitting:",email,password)
         e.preventDefault()
-        setLoading(<Spinner/>)
+        setLoading(<Spinner stopColor="#FFFFFF"/>)
         if (!API) {
             console.warn("Backend not connected yet");
         }else{
